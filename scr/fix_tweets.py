@@ -13,22 +13,29 @@ def remove_links(tweet):
     return tweet
 
 def remove_tags(tweet):
+    import re
+    hash_tags=re.findall(r'#\w+', tweet)
+    name_tags=re.findall(r'@\w+', tweet)
     tweet = " ".join(filter(lambda x:x[0]!='@', tweet.split()))
     tweet = " ".join(filter(lambda x:x[0]!='#', tweet.split()))
-    return tweet
+    return tweet,hash_tags,name_tags
 
 
 def wd_rem(tweets):
     import re
     import urlmarker
-    symbols="#@,.'\"\\:[]<>1234567890!$%^&*;?/-_+=)("
+    symbols="#@,.\"\\:[]<>1234567890$%^&*;?/-_+=)("
     tw_l=[]
+    ht_l=[]
+    nt_l=[]
     for tweet in tweets:
         tw=tweet[1]
         tw=remove_links(tw)
         tw = tw.replace("@", " @")
         tw = tw.replace("#", " #")
-        tw=remove_tags(tw)
+        tw,ht,nt=remove_tags(tw)
         tw=remove_chars(tw,symbols)
-        tw_l.append(tw)
-    return tw_l
+        tw_l.append( [tw,ht,nt ])
+        ht_l+=ht
+        nt_l+=nt
+    return tw_l,ht_l,nt_l
