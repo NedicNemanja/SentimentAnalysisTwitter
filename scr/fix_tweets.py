@@ -10,7 +10,7 @@ def remove_links(tweet):
     links=re.findall(urlmarker.URL_REGEX, tweet)
     for link in links:
         tweet = tweet.replace(link,"")
-    return tweet
+    return tweet,links
 
 def take_tags(tweet):
     import re
@@ -28,12 +28,12 @@ def clean_tw(tweets):
     nt_l=[]
     for tweet in tweets:
         tw=tweet[1]
-        tw=remove_links(tw)
+        tw,links=remove_links(tw)
         tw = tw.replace("@", " @")
         tw = tw.replace("#", " #")
         tw,ht,nt=take_tags(tw)
         tw=remove_chars(tw,symbols)
-        tw_l.append( [tw,ht,nt ])
+        tw_l.append( [tw,ht,nt,links ])
         ht_l+=ht
         nt_l+=nt
     return tw_l,ht_l,nt_l
