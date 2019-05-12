@@ -12,7 +12,7 @@ def Word2Vec(tweet_list):
     return model_w2v
 
 
-def WordEmbeddingsVectorize(tweet_list,size=200,filename=None):
+def WordEmbeddingsVectorize(tweet_list, size=200, pkl_filename=None):
     model = Word2Vec(tweet_list)
     tz = TweetTokenizer(strip_handles=True, reduce_len=True)
     # calculate mean vector for every tweet
@@ -27,7 +27,7 @@ def WordEmbeddingsVectorize(tweet_list,size=200,filename=None):
         tweet_vector = [x/size for x in tweet_vector]
         tweet_vectors.append(tweet_vector)
     print(tweet_vectors)
-    if filename is not None:    #save vectorized tweets to disk
-        with open(filename) as file:
-            pickle.dump(tweet_vectors,file)
+    if pkl_filename is not None:    #save vectorized tweets to disk
+        with open(pkl_filename,"w+") as file:
+            pickle.dump(tweet_vectors, file, protocol=pickle.HIGHEST_PROTOCOL)
     return tweet_vectors
