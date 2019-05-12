@@ -20,8 +20,8 @@ def remove_tags(tweet):
     tweet = " ".join(filter(lambda x:x[0]!='#', tweet.split()))
     return tweet,hash_tags,name_tags
 
-
-def wd_rem(tweets):
+'''cleans the tweets and adds the info in tree lists'''
+def clean_tw(tweets):
     import re
     import urlmarker
     symbols="#@,.\"\\:[]<>1234567890$%^&*;?/-_+=)("
