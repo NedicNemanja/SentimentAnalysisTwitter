@@ -24,7 +24,7 @@ def check_lex(lexs,word):
 
 def read_dict():
     csv_output = []
-    file_path="../resources/words.txt"
+    file_path="resources/words.txt"
     with open(file_path, 'r',encoding='utf8',errors="ignore") as f_input:
         csv_input = csv.reader(f_input, delimiter='\t', skipinitialspace=True)
         for cols in csv_input:
