@@ -28,6 +28,6 @@ def WordEmbeddingsVectorize(tweet_list, size=200, pkl_filename=None):
         tweet_vectors.append(tweet_vector)
     print(tweet_vectors)
     if pkl_filename is not None:    #save vectorized tweets to disk
-        with open(pkl_filename,"w+") as file:
+        with open(pkl_filename,"wb+") as file:
             pickle.dump(tweet_vectors, file, protocol=pickle.HIGHEST_PROTOCOL)
     return tweet_vectors
